@@ -15,7 +15,7 @@ npm run dev
 npm run build
 ```
 
-Deploy on Vercel by importing this repository. Use Vite, `npm run build`, and the `dist` output directory. No environment variables are needed. Pages use hash routes so direct links work on static hosting.
+Deploy on Vercel by importing this repository. Use Vite, `npm run build`, and the `dist` output directory. No environment variables are needed. Pages use clean History API routes. The included Vercel rewrite serves the app for direct page links and refreshes. Legacy hash links automatically migrate to their clean equivalents.
 
 ## Contact form activation
 
@@ -25,10 +25,10 @@ If FormSubmit is unavailable, visitors see an error with a direct email fallback
 
 ## Pages
 
-- Home: `/#/`
-- How it works: `/#/how-it-works`
-- Blog: `/#/blog`
-- Contact: `/#/contact`
+- Home: `/`
+- How it works: `/how-it-works`
+- Blog: `/blog`
+- Contact: `/contact`
 - Application sign-in: https://app.lorbyte.com
 
 The product dashboard is a demonstration using sample data.
