@@ -1,0 +1,22 @@
+{
+  "provider": "Unsplash",
+  "license": "https://unsplash.com/license",
+  "photos": [
+    {
+      "file": "team.jpg",
+      "source": "https://unsplash.com/photos/DZkYOtfxEvU"
+    },
+    {
+      "file": "hotel.jpg",
+      "source": "https://unsplash.com/s/photos/hotel-lobby"
+    },
+    {
+      "file": "workspace.jpg",
+      "source": "https://unsplash.com/photos/v6vxTvqeVuo"
+    },
+    {
+      "file": "office.jpg",
+      "source": "https://unsplash.com/photos/UgYT5nkXdK4"
+    }
+  ]
+}

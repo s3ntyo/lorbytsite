@@ -6,6 +6,7 @@ import {build} from 'esbuild';
 import React from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {content,languages,articleSlugs} from '../src/content.js';
+import {photography} from '../src/photography.js';
 import {transform} from 'esbuild';
 
 function shape(value){if(Array.isArray(value))return value.map(shape);if(value&&typeof value==='object')return Object.fromEntries(Object.keys(value).map(k=>[k,shape(value[k])]));return typeof value}
@@ -27,7 +28,8 @@ for(const lang of languages){for(const pathname of ['/','/contact','/how-it-work
  assert.ok(!/href="\/#\//.test(html),'No hash routes');
  assert.ok(html.includes('https://app.lorbyte.com'),'App link');
  if(pathname==='/contact'){assert.ok(html.includes('name="message"'));assert.ok(html.includes('contact@lorbyte.com'));assert.ok(html.includes(content[lang].send));assert.ok(html.includes('type="email" dir="ltr"'));}
- if(pathname==='/')assert.ok(html.includes(content[lang].hero[0]));
+ if(pathname==='/'){assert.ok(html.includes(content[lang].hero[0]));assert.ok(html.includes('hero-ambient'));assert.ok(html.includes('/images/team.jpg'));assert.ok(html.includes('/images/hotel.jpg'));}
+ if(['/','/contact','/how-it-works','/blog'].includes(pathname))assert.ok(html.includes('<img '),'Photographs on '+pathname);
  if(pathname==='/missing')assert.ok(html.includes(content[lang].notFound));
  for(const article of articleSlugs)if(pathname==='/blog/'+article)assert.ok(html.includes(content[lang].articles[articleSlugs.indexOf(article)][0][1]));
  checks++;
@@ -42,4 +44,7 @@ await build({stdin:{contents:previewSource+'\nexport {ITDesk,HotelBoard,HRPlanne
 const previews=await import(pathToFileURL(previewOutput).href);
 for(const lang of languages){const c=previews.previewCopy[lang];assert.deepEqual(shape(c),shape(previews.previewCopy.en));const ticket=renderToStaticMarkup(React.createElement(previews.ITDesk,{c}));const hotel=renderToStaticMarkup(React.createElement(previews.HotelBoard,{c}));const hr=renderToStaticMarkup(React.createElement(previews.HRPlanner,{c}));assert.ok(ticket.includes('data-preview="ticket-queue"'));assert.ok(ticket.includes(c.message));assert.ok(hotel.includes('data-preview="maintenance-board"'));assert.ok(hotel.includes(c.rooms[0]));assert.ok(hr.includes('data-preview="leave-calendar"'));assert.ok(hr.includes(c.month));assert.equal((hr.match(/class="calendar-cell/g)||[]).length,42);assert.ok(!hotel.includes('ticket-queue'));assert.ok(!hr.includes('maintenance-board'));}
 const config=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));assert.ok(config.rewrites.some(r=>r.destination==='/index.html'));
+for(const name of ['team','hotel','workspace','office']){const jpg=fs.readFileSync(path.join(root,'public','images',name+'.jpg'));assert.equal(jpg[0],255);assert.equal(jpg[1],216);for(const lang of languages)assert.ok(photography[lang].alt[name].length>10);}
+assert.ok(source.includes('visible&&!reduced'),'Hero respects reduced motion and viewport');
+assert.equal(content.ar.nav[1],'طريقة العمل');assert.ok(content.ar.intro.includes('بلاغات الصيانة'));
 console.log(`Passed: ${checks} translated routes, 9 distinct workflow preview renders, 42-cell leave calendars, translation parity, language fallback, clean routes, Arabic direction contract, and contact/Vercel configuration.`);

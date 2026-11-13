@@ -33,3 +33,9 @@ Legacy hash links automatically convert to clean URLs. All product examples use 
 ## Verification
 
 Run `node scripts/check-site.mjs` to verify translation parity, all translated routes, initial language selection, email routing, and deployment configuration.
+
+## Photography and Arabic copy
+
+Photographs are bundled in `public/images`; original sources and the Unsplash license are recorded in `public/images/credits.json`. They illustrate workplace contexts and do not represent Lorbyte customers or staff. Images have localized alt text and lazy loading.
+
+Arabic site copy and product examples are authored in `src/arabic.js`. Photo descriptions are in `src/photography.js`. Hero background motion pauses offscreen and is disabled when reduced motion is requested.
