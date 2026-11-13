@@ -28,7 +28,7 @@ Requests are sent through FormSubmit to **contact@lorbyte.com**. Complete FormSu
 - Contact: /contact
 - Sign-in: https://app.lorbyte.com
 
-Legacy hash links automatically convert to clean URLs. Dashboard data is illustrative.
+Legacy hash links automatically convert to clean URLs. All product examples use illustrative data. The three workspace tabs demonstrate distinct layouts and interactions: IT tickets and conversation details, room-based hotel maintenance columns, and HR leave requests linked to a monthly calendar. Tabs support keyboard navigation; selects update the highlighted request or leave dates.
 
 ## Verification
 
