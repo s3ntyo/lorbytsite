@@ -1,34 +1,35 @@
 # Lorbyte
 
-Static React marketing website with Vite and Framer Motion.
+Static React marketing website built with Vite and Framer Motion.
 
-## Local development
+## Development
 
-```sh
-npm ci
-npm run dev
-```
+Run `npm ci`, then `npm run dev`. Run `npm run build` for production.
 
-## Production
+## Deploy on Vercel
 
-```sh
-npm run build
-```
+Import this repository. Framework: Vite. Build command: `npm run build`. Output: `dist`. No environment variables are needed. The included rewrite supports clean URLs and page refreshes.
 
-Deploy on Vercel by importing this repository. Use Vite, `npm run build`, and the `dist` output directory. No environment variables are needed. Pages use clean History API routes. The included Vercel rewrite serves the app for direct page links and refreshes. Legacy hash links automatically migrate to their clean equivalents.
+## Languages
 
-## Contact form activation
+English, French, and Arabic are available from the header and footer. Switching languages preserves the current page and form values. The choice is saved locally and shareable with `?lang=en`, `?lang=fr`, or `?lang=ar`. Arabic sets the document direction to RTL. Content, forms, FAQs, dashboard examples, and all three articles are translated.
 
-The form posts to FormSubmit and delivers requests to **contact@lorbyte.com** without opening visitors’ email apps. FormSubmit requires the inbox owner to confirm the activation email after the first submission. Complete that confirmation before accepting real requests, then submit a test and verify delivery. No email password or API secret is included in the website.
+Translations live in `src/content.js`. The website uses DM Sans and Noto Sans Arabic, with system fallbacks. Animations respect reduced-motion preferences.
 
-If FormSubmit is unavailable, visitors see an error with a direct email fallback. Submissions include name, email, company, request type, team, and message. A hidden honeypot is included; FormSubmit also applies its service-side spam controls.
+## Contact
+
+Requests are sent through FormSubmit to **contact@lorbyte.com**. Complete FormSubmit's one-time activation in that inbox after the first submission. The form includes loading, success, activation, timeout, and error states, plus a hidden honeypot. Do not include secrets in the site.
 
 ## Pages
 
-- Home: `/`
-- How it works: `/how-it-works`
-- Blog: `/blog`
-- Contact: `/contact`
-- Application sign-in: https://app.lorbyte.com
+- Home: /
+- How it works: /how-it-works
+- Journal: /blog
+- Contact: /contact
+- Sign-in: https://app.lorbyte.com
 
-The product dashboard is a demonstration using sample data.
+Legacy hash links automatically convert to clean URLs. Dashboard data is illustrative.
+
+## Verification
+
+Run `node scripts/check-site.mjs` to verify translation parity, all translated routes, initial language selection, email routing, and deployment configuration.
